@@ -1,4 +1,19 @@
 // Business logic
+var isVowel = function(char){
+  var result;
+  char = char.toLowerCase();
+    if(char == "a" || char == "e" || char == "i" || char == "o" || char == "u" ) {
+        result = true;
+    }
+    else{
+        result = false;
+    }
+  return result;
+}
+
+
+
+
 var translator = function(string){
   var arr = [];
   arr = string.split(" ");
@@ -9,20 +24,25 @@ var translator = function(string){
       var counter = 0;
       var j = 0;
       var word = arr[i];
-      while ((word[j] != "a" && word[j] != "e" && word[j] != "o" && word[j] != "i" && word[j] != "u" && word[j] != "y") && j < word.length){
-        // while (j<10 && j < word.length){
-          console.log(word[j]);
-        counter ++;
-        if (word[j] === "u" && word[j-1] === "q"){
+      while ((word[j] != "a" && word[j] != "e" && word[j] != "o" && word[j] != "i" && word[j] != "y") && j < word.length){
+
+        if (word[j] === "u" && word[j-1] === "q" && isVowel(word[j + 1])){
           counter ++;
+          break;
+        } else if (word[j] === "u" && word[j-1] !== "q"){
+          break;
+        } else {
+          counter++;
         }
-        console.log(j);
-        // console.log(counter);
         j++;
       }
-      arr[i] = arr[i].slice(0, (counter-1)).concat("ay")
+      var firstConsonants = arr[i].slice(0, counter);
+      var wordLeftOver = arr[i].slice(counter, arr[i].length)
+      arr[i] = wordLeftOver.concat(firstConsonants).concat("ay");
     }
   }
   var newString = arr.join(" ");
   return newString;
 }
+
+// UI logic
