@@ -46,3 +46,14 @@ var translator = function(string){
 }
 
 // UI logic
+$(document).ready(function(){
+  $("form#translator").submit(function(event){
+    event.preventDefault();
+
+    var userInput = $("#sentence").val().toLowerCase();
+    var result = translator(userInput);
+
+    $("span.translation").text(result);
+    $("#output").show();
+  });
+});
