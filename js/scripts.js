@@ -57,3 +57,16 @@ $(document).ready(function(){
     $("#output").show();
   });
 });
+
+// code from different issignment (binery convertion). It will be delited later.
+var bineryConverter = function (arr){
+    if (arr.length != 0) {
+      var i = arr.length;
+      var result = Math.pow(parseInt(arr[i - 1]), i) * Math.pow(2, i);
+      arr.pop[arr[i - 1]];
+      result = result + bineryConverter(arr);
+    } else {
+      return result;
+    }
+    return result;
+}
